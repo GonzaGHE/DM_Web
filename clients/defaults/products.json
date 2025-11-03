@@ -1,0 +1,58 @@
+[
+  {
+    "id": "netflix-premium",
+    "name": "Netflix Premium 4K",
+    "category": "Streaming",
+    "short_description": "Cuenta 4 perfiles en 4K HDR.",
+    "price": 12.99,
+    "currency": "USDT",
+    "image": "https://via.placeholder.com/800x500.png?text=Netflix+Premium",
+    "badge": "oferta",
+    "status": "disponible",
+    "tags": ["4K", "HDR", "4 perfiles"],
+    "featured": true,
+    "created_at": "2025-09-01"
+  },
+  {
+    "id": "disney-plus-uhd",
+    "name": "Disney+ UHD",
+    "category": "Streaming",
+    "short_description": "Películas y series Disney, Marvel, Star Wars.",
+    "price": 9.99,
+    "currency": "USDT",
+    "image": "https://via.placeholder.com/800x500.png?text=Disney%2B+UHD",
+    "badge": "nuevo",
+    "status": "disponible",
+    "tags": ["UHD", "Familia"],
+    "featured": false,
+    "created_at": "2025-10-10"
+  },
+  {
+    "id": "chatgpt-plus",
+    "name": "ChatGPT Plus (gestión)",
+    "category": "IA",
+    "short_description": "Configuración y gestión de suscripción/espacios de trabajo.",
+    "price": 20,
+    "currency": "USDT",
+    "image": "https://via.placeholder.com/800x500.png?text=ChatGPT+Plus",
+    "badge": "proximamente",
+    "status": "bajo-pedido",
+    "tags": ["IA", "Automatización"],
+    "featured": true,
+    "created_at": "2025-07-15"
+  },
+  {
+    "id": "dev-sitio-web",
+    "name": "Creación de sitio web",
+    "category": "Desarrollo",
+    "short_description": "Landing page optimizada (GitHub Pages).",
+    "price": 199,
+    "currency": "USD",
+    "image": "https://via.placeholder.com/800x500.png?text=Sitio+Web",
+    "badge": "",
+    "status": "disponible",
+    "tags": ["Landing", "SEO"],
+    "featured": false,
+    "created_at": "2025-05-20"
+  }
+]

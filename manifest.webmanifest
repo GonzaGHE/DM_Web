@@ -1,0 +1,12 @@
+{
+  "name": "Catálogo de Servicios Digitales",
+  "short_name": "Catálogo",
+  "start_url": "./?brand=demo",
+  "display": "standalone",
+  "background_color": "#0b0f14",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    { "src": "./assets/img/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "./assets/img/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

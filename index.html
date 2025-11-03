@@ -1,429 +1,119 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mon site statique</title>
-    <meta
-      name="description"
-      content="Petit site HTML/CSS/JS pour tester GitHub Pages."
-    />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚡️</text></svg>"
-    />
-    <style>
-      :root {
-        --bg: #0b0c10; /* sera utilisé en mode sombre */
-        --text: #111827;
-        --muted: #6b7280;
-        --accent: #6366f1;
-        --card: #ffffff;
-        --ring: rgba(99, 102, 241, 0.35);
-        --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        --radius: 16px;
-      }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --text: #e5e7eb;
-          --muted: #9ca3af;
-          --card: #111827;
-          --bg: #0a0a0a;
-        }
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        margin: 0;
-        font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu;
-        color: var(--text);
-        background: linear-gradient(180deg, var(--bg), #0f172a 40%, var(--bg));
-      }
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-      header {
-        position: sticky;
-        top: 0;
-        backdrop-filter: saturate(160%) blur(8px);
-        background: rgba(255, 255, 255, 0.6);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      }
-      @media (prefers-color-scheme: dark) {
-        header {
-          background: rgba(0, 0, 0, 0.45);
-          border-color: rgba(255, 255, 255, 0.08);
-        }
-      }
-      .nav {
-        max-width: 1100px;
-        margin: 0 auto;
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        padding: 10px 16px;
-      }
-      .nav .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 700;
-      }
-      .nav .spacer {
-        flex: 1;
-      }
-      .nav a {
-        padding: 8px 10px;
-        border-radius: 10px;
-      }
-      .nav a:hover {
-        background: rgba(99, 102, 241, 0.12);
-      }
-      .container {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 28px 16px;
-      }
-      .hero {
-        display: grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 24px;
-        align-items: center;
-        padding: 48px 0;
-      }
-      .hero h1 {
-        font-size: clamp(28px, 6vw, 48px);
-        line-height: 1.15;
-        margin: 0 0 12px;
-      }
-      .hero p {
-        margin: 0 0 20px;
-        color: var(--muted);
-      }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        background: var(--accent);
-        color: #fff;
-        padding: 12px 18px;
-        border-radius: 999px;
-        border: 0;
-        box-shadow: var(--shadow);
-        cursor: pointer;
-      }
-      .btn:focus {
-        outline: 3px solid var(--ring);
-        outline-offset: 2px;
-      }
-      .ghost {
-        background: transparent;
-        color: var(--accent);
-        box-shadow: none;
-        border: 1px solid var(--accent);
-      }
-      .card {
-        background: var(--card);
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: 22px;
-      }
-      @media (prefers-color-scheme: dark) {
-        .card {
-          border-color: rgba(255, 255, 255, 0.08);
-        }
-      }
-      .grid {
-        display: grid;
-        gap: 16px;
-      }
-      .grid.cols-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-      @media (max-width: 900px) {
-        .hero {
-          grid-template-columns: 1fr;
-        }
-        .grid.cols-3 {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      @media (max-width: 640px) {
-        .grid.cols-3 {
-          grid-template-columns: 1fr;
-        }
-      }
-      .project h3 {
-        margin: 0 0 6px;
-      }
-      .project p {
-        margin: 0;
-        color: var(--muted);
-      }
-      .badge {
-        display: inline-block;
-        font-size: 12px;
-        padding: 4px 8px;
-        border-radius: 999px;
-        background: rgba(99, 102, 241, 0.12);
-        color: var(--accent);
-        margin: 6px 6px 0 0;
-      }
-      section {
-        padding: 32px 0;
-      }
-      footer {
-        padding: 40px 16px;
-        color: var(--muted);
-        text-align: center;
-      }
-      /* petit menu mobile */
-      .menu-toggle {
-        display: none;
-      }
-      @media (max-width: 760px) {
-        .menu-toggle {
-          display: inline-flex;
-        }
-        .nav .links {
-          display: none;
-          position: absolute;
-          left: 16px;
-          right: 16px;
-          top: 60px;
-          flex-direction: column;
-          background: var(--card);
-          border-radius: 12px;
-          padding: 8px;
-          border: 1px solid rgba(0, 0, 0, 0.06);
-        }
-        .nav.open .links {
-          display: flex;
-        }
-      }
-      .kbd {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: 12px;
-        background: rgba(0, 0, 0, 0.06);
-        padding: 2px 6px;
-        border-radius: 6px;
-      }
-      .divider {
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(99, 102, 241, 0.4),
-          transparent
-        );
-        margin: 28px 0;
-      }
-      .lead {
-        font-weight: 600;
-      }
-      .pill {
-        display: inline-flex;
-        gap: 8px;
-        align-items: center;
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: rgba(99, 102, 241, 0.12);
-        color: var(--accent);
-        font-size: 14px;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <nav class="nav" id="nav">
-        <div class="brand">⚡️ <span>MonSite</span></div>
-        <div class="spacer"></div>
-        <button
-          class="btn ghost menu-toggle"
-          id="menuBtn"
-          aria-label="Ouvrir le menu"
-        >
-          Menu
-        </button>
-        <div class="links" aria-label="Navigation">
-          <a href="#accueil">Accueil</a>
-          <a href="#projets">Projets</a>
-          <a href="#contact">Contact</a>
-          <a href="#guide">Guide</a>
+<!doctype html>
+<html lang="es" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo de Servicios Digitales</title>
+  <meta name="description" content="Catálogo de streaming, IA, scripts y desarrollo web. Contacto rápido por WhatsApp." />
+
+  <!-- Open Graph básico (actualizado dinámicamente por JS cuando carga la brand) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Catálogo de Servicios Digitales" />
+  <meta property="og:description" content="Streaming, IA, scripts y sitios web. Solicita info por WhatsApp." />
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Cat%C3%A1logo" />
+  <meta property="og:url" content="." />
+
+  <!-- JSON-LD del sitio (los productos se inyectan luego vía JS) -->
+  <script type="application/ld+json" id="site-jsonld">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Catálogo de Servicios Digitales",
+    "url": ".",
+    "sameAs": []
+  }
+  </script>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#0ea5e9" id="meta-theme-color" />
+
+  <link rel="preload" href="./assets/css/styles.css" as="style">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="./" class="brand" id="brand">
+        <img id="brand-logo" alt="Logo" />
+        <span id="brand-name">Tu Marca</span>
+      </a>
+      <nav class="header-actions">
+        <div class="search-group">
+          <input type="search" id="search" placeholder="Buscar productos…" aria-label="Buscar" />
         </div>
+        <select id="category-filter" aria-label="Categoría">
+          <option value="__all__">Todas las categorías</option>
+        </select>
+        <select id="sort-select" aria-label="Ordenar por">
+          <option value="featured">Destacados</option>
+          <option value="price-asc">Precio: menor a mayor</option>
+          <option value="price-desc">Precio: mayor a menor</option>
+          <option value="newest">Más nuevos</option>
+        </select>
+        <select id="currency-select" aria-label="Moneda">
+          <option>USD</option>
+          <option>EUR</option>
+          <option>ARS</option>
+        </select>
+        <button id="theme-toggle" class="icon-btn" title="Cambiar tema" aria-label="Cambiar tema">🌓</button>
+        <a id="wa-cta" class="btn primary" target="_blank" rel="noopener">WhatsApp</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main id="accueil" class="container">
-      <section class="hero">
-        <div>
-          <span class="pill">100% statique • GitHub Pages</span>
-          <h1>Un site ultra simple pour démarrer 🚀</h1>
-          <p>
-            HTML + CSS + JavaScript, aucun framework, prêt à être publié
-            gratuitement sur GitHub Pages.
-          </p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap">
-            <a class="btn" href="#guide">Publier sur GitHub Pages</a>
-            <button class="btn ghost" id="themeToggle" type="button">
-              Basculer thème
-            </button>
-          </div>
+  <main>
+    <section class="hero container" id="hero">
+      <div>
+        <h1 id="hero-title">Soluciones de Streaming, IA y Desarrollo</h1>
+        <p id="hero-subtitle">Alquiler y venta de plataformas de streaming, acceso a IA como ChatGPT, scripts y creación de sitios web.</p>
+        <div class="hero-ctas">
+          <a href="#catalog" class="btn primary">Ver catálogo</a>
+          <a id="hero-wa" class="btn ghost" target="_blank" rel="noopener">Consultar por WhatsApp</a>
         </div>
-        <div class="card">
-          <h2 style="margin-top: 0">Petit widget interactif</h2>
-          <p class="lead">Tapez un message et cliquez pour voir la magie ✨</p>
-          <div style="display: flex; gap: 8px; margin: 10px 0">
-            <input
-              id="msg"
-              class="card"
-              style="flex: 1; padding: 10px; box-shadow: none"
-              placeholder="Hello GitHub Pages !"
-            />
-            <button id="sayBtn" class="btn" type="button">Dire</button>
-          </div>
-          <output
-            id="out"
-            style="display: block; margin-top: 10px; color: var(--muted)"
-            >…</output
-          >
-        </div>
-      </section>
-
-      <section id="projets">
-        <h2>Projets</h2>
-        <div class="grid cols-3">
-          <article class="card project">
-            <h3>Carte 1</h3>
-            <p>Un exemple de carte de contenu. Modifiez ce texte.</p>
-            <span class="badge">HTML</span> <span class="badge">CSS</span>
-          </article>
-          <article class="card project">
-            <h3>Carte 2</h3>
-            <p>Ajoutez vos liens, captures d’écran, ou démos.</p>
-            <span class="badge">Vanilla JS</span>
-          </article>
-          <article class="card project">
-            <h3>Carte 3</h3>
-            <p>Idéale pour tester la mise en page responsive.</p>
-            <span class="badge">Responsive</span>
-          </article>
-        </div>
-      </section>
-
-      <div class="divider"></div>
-
-      <section id="contact">
-        <h2>Contact</h2>
-        <p>
-          Ce formulaire ne nécessite aucun backend, il ouvre simplement votre
-          client mail.
-        </p>
-        <form id="contactForm" class="card" style="display: grid; gap: 12px">
-          <label
-            >Votre email
-            <input
-              required
-              type="email"
-              name="from"
-              placeholder="vous@example.com"
-              class="card"
-              style="width: 100%; padding: 10px; box-shadow: none"
-            />
-          </label>
-          <label
-            >Message
-            <textarea
-              required
-              name="message"
-              rows="4"
-              placeholder="Bonjour !"
-              class="card"
-              style="width: 100%; padding: 10px; box-shadow: none"
-            ></textarea>
-          </label>
-          <button class="btn" type="submit">Envoyer</button>
-        </form>
-      </section>
-
-      <div class="divider"></div>
-
-      <section id="guide">
-        <h2>Guide GitHub Pages (rapide)</h2>
-        <ol>
-          <li>Créez un dépôt public sur GitHub (nom au choix).</li>
-          <li>
-            Ajoutez ce fichier <span class="kbd">index.html</span> à la racine
-            du dépôt.
-          </li>
-          <li>
-            Sur GitHub, allez dans <span class="kbd">Settings → Pages</span>.
-            Choisissez <em>"Deploy from a branch"</em>, puis la branche
-            <span class="kbd">main</span> et le dossier
-            <span class="kbd">/root</span>, enregistrez.
-          </li>
-          <li>
-            Après le déploiement, votre site sera accessible via l’URL indiquée
-            par GitHub Pages.
-          </li>
-        </ol>
-        <p>
-          Astuce: si vous nommez le dépôt
-          <span class="kbd">votre-username.github.io</span>, l’URL sera
-          <span class="kbd">https://votre-username.github.io</span>.
-        </p>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container">
-        © <span id="year"></span> · Fait avec ❤ et GitHub Pages
       </div>
-    </footer>
+      <picture>
+        <source srcset="https://via.placeholder.com/640x400.webp?text=Hero" type="image/webp">
+        <img src="https://via.placeholder.com/640x400.png?text=Hero" alt="Servicios digitales" width="640" height="400" loading="lazy" decoding="async" class="hero-img"/>
+      </picture>
+    </section>
 
-    <script>
-      // Menu mobile
-      const nav = document.getElementById("nav");
-      document.getElementById("menuBtn").addEventListener("click", () => {
-        nav.classList.toggle("open");
-      });
+    <section class="container controls">
+      <div class="badges-filter" id="badges-filter" aria-label="Estado">
+        <button data-badge="__all__" class="chip active">Todos</button>
+        <button data-badge="nuevo" class="chip">Nuevo</button>
+        <button data-badge="oferta" class="chip">Oferta</button>
+        <button data-badge="proximamente" class="chip">Próximamente</button>
+        <button data-badge="agotado" class="chip">Agotado</button>
+      </div>
+    </section>
 
-      // Widget "Dire"
-      const input = document.getElementById("msg");
-      const out = document.getElementById("out");
-      document.getElementById("sayBtn").addEventListener("click", () => {
-        const text = (input.value || "Hello GitHub Pages !").trim();
-        out.textContent = "✅ " + text;
-      });
+    <section class="container" id="catalog">
+      <div id="products-grid" class="grid"></div>
+      <div id="empty-state" class="empty hidden">No hay productos que coincidan con tu búsqueda.</div>
+    </section>
 
-      // Formulaire mailto:
-      document.getElementById("contactForm").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const data = new FormData(e.target);
-        const from = encodeURIComponent(data.get("from"));
-        const msg = encodeURIComponent(data.get("message"));
-        const mailto = `mailto:contact@example.com?subject=Message depuis le site&body=De:%20${from}%0D%0A%0D%0A${msg}`;
-        window.location.href = mailto;
-      });
+    <section class="container wishlist" id="wishlist">
+      <h2>Wishlist</h2>
+      <div id="wishlist-items" class="grid"></div>
+      <div class="wishlist-actions">
+        <button id="wishlist-clear" class="btn ghost">Vaciar wishlist</button>
+        <a id="wishlist-wa" class="btn primary" target="_blank" rel="noopener">Enviar wishlist por WhatsApp</a>
+      </div>
+    </section>
+  </main>
 
-      // Thème clair/sombre via data-theme
-      const root = document.documentElement;
-      const themeBtn = document.getElementById("themeToggle");
-      themeBtn.addEventListener("click", () => {
-        const current = root.getAttribute("data-theme");
-        root.setAttribute("data-theme", current === "light" ? "dark" : "light");
-        // Option simple: on inverse les couleurs en togglant la classe du body si besoin
-        document.body.classList.toggle("alt");
-      });
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small id="footer-copy">© <span id="year"></span> <span id="brand-name-footer">Tu Marca</span>. Algunos productos pueden estar sujetos a disponibilidad. Precios referenciales.</small>
+      <nav class="footer-links">
+        <a href="#" id="footer-wa" target="_blank" rel="noopener">WhatsApp</a>
+      </nav>
+    </div>
+  </footer>
 
-      // Année courante
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
-  </body>
+  <!-- Barra flotante móvil -->
+  <a id="fab-wa" class="fab" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+
+  <script defer src="./assets/js/app.js"></script>
+</body>
 </html>

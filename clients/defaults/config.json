@@ -1,0 +1,26 @@
+{
+  "brand": {
+    "name": "StreamingPro",
+    "logo_img": "./assets/img/icons/icon-192.png",
+    "primary_color": "#22c55e",
+    "theme": "auto",
+    "hero_title": "Streaming, IA y automatización",
+    "hero_subtitle": "Alquiler de plataformas, acceso a IA como ChatGPT, scripts y desarrollo web",
+    "seo_title": "StreamingPro – Catálogo de servicios"
+  },
+  "contact": {
+    "whatsapp_number": "+54 9 11 2345 6789",
+    "default_message": "Hola, vi tu sitio de {brand}. ¿Me das más info?",
+    "product_message": "Hola, vi \"{product}\" en el sitio de {brand}. ¿Me das más info?"
+  },
+  "currency": {
+    "default": "USD",
+    "supported": ["USD", "EUR", "ARS"],
+    "rates": { "USD": 1, "EUR": 0.92, "ARS": 1000 }
+  },
+  "seo": {
+    "og_title": "StreamingPro – Catálogo",
+    "og_description": "Streaming 4K, accesos IA, scripts y más",
+    "og_image": "https://via.placeholder.com/1200x630.png?text=StreamingPro"
+  }
+}
